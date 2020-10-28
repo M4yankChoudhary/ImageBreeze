@@ -1,0 +1,11 @@
+select {
+    width: 50% !important;
+}
+
+.form-control-file {
+    margin-left: 40% !important;
+}
+
+body {
+    background-image: url(/static/photos/background-images/upload.jpg);
+}

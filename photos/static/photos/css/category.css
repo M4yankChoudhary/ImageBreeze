@@ -1,0 +1,18 @@
+
+.image {
+    opacity: 1;
+    padding-right: 93px;
+}
+.image:hover {
+    opacity: 0.5;
+}
+
+.jumbotron {
+    margin-left: 10%
+}
+
+@media only screen and (max-width: 600px) {
+    .jumbotron {
+        margin-left: auto !important;
+    }
+}

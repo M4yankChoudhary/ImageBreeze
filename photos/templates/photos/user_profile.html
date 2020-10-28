@@ -1,0 +1,49 @@
+{% extends 'photos/base.html' %}
+
+{% load static %}
+
+{% block title %} {{request.user.username}} {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'photos/css/user.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="container text-center">
+{% if profile_picture %}
+
+{% for picture in profile_picture %}
+<img class="profile-picture" src="{{picture.img.url}}" style="max-width: 200px; max-height: 200px;">
+{% endfor %}
+
+{% else %}
+<img class="profile-picture" src="/static/photos/dp/default.png">
+{% endif %}
+<form id="form" action="{% url 'changeProfilePicture' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input name="image" id="profile" type="file" hidden>
+</form>
+<i class="fa fa-pencil-square-o" onclick="document.getElementById('profile').click();" aria-hidden="true"></i>
+<hr>
+Total Posts: {{total_posts}}
+<hr>
+Username: {{user.username}}
+<hr>
+Full Name: {{user.first_name}} {{user.last_name}}
+<hr>
+Email : {{user.email}}
+<hr>
+<div class="container my-4">
+    <div class="row text-center">
+        {% for post in user_posts %}
+      <div class="col-lg-4 col-md-12 mb-4">
+        <a href="{% url 'post' post.id %}"><img class="image" src="{{post.img.url}}" style="max-width: 400px; max-height: 400px;"></a>
+        <p><span class="title"> {{post.title}}</span> <br> {{post.category}} <br> Likes: {{post.likes}} <br> Creator: {{post.creator}} </p>
+      </div>
+  {% endfor %}
+</div>
+<hr>
+<a href="{% url 'index' %}">Go to Homepage </a>
+</div>
+<script type="text/javascript" src="{% static 'photos/js/user.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'photos/base.html' %}
+
+{% block title %} {{user_post.title}} {% endblock %}
+
+{% load static %}
+
+{% block css %}
+<link href="{% static 'photos/css/post.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+{% if user_post.creator == request.user.username %}
+<a href="{% url 'delete' user_post.id %}" class="btn btn-danger"; style="margin-left: 90%;">Delete</a>
+{% endif %}
+
+<div class="container text-center">
+    <div class="card bg-dark text-white">
+        <img src="{{user_post.img.url}}" class="card-img" alt="{{user_post.title}}">
+        <div class="card-img-overlay">
+          <h5 class="card-title">{{user_post.title}}</h5>
+        </div>
+      </div>
+ </div>
+<br>
+<h6 class="text-center">Likes: <span id="num-likes">{{user_post.likes}}</span></h6>
+<div class="text-center">
+    {% if like_status == False %}
+    <button class="like btn btn-danger" type="button" value="like"> &#9825;</button>
+    {% else %}
+    <button class="like btn btn-danger" type="button" value="unlike"> &#9829; </button>
+    {% endif %}
+</div>
+<hr style="background-color: white;">
+</div>
+<br>
+<div class="container text-center">
+    <h1>Comments</h1>
+    <div class="text-center">
+        <input type="text" id="input-comment" placeholder="Add a Comment...">
+        <button class="add-comment btn btn-success">Comment</button>
+    </div>
+    <hr style="background-color: black;">
+<div id="comments">
+    {% for comment in user_comments %}
+    <p class="box"><span class="username">{{comment.username}} <br> </span>{{comment.comment}} <span class="date-time">{{comment.date}}</span><span class="date-time">{{comment.time}}</span> </p>
+    {% endfor %}
+</div>
+</div>
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- postLike.js -->
+    <script type="text/javascript">
+        var post_id = "{{user_post.id}}";
+    </script>
+    <script src="{% static 'photos/js/postLike.js' %}"></script>
+    <!-- comment.js -->
+    <script type="text/javascript">
+        var post_id = "{{user_post.id}}";
+        var csrf = '{{ csrf_token }}';
+    </script>
+    <script src="{% static 'photos/js/comment.js' %}"></script>
+{% endblock %}

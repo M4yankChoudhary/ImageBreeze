@@ -1,0 +1,20 @@
+body {
+    background-image: url(/static/photos/background-images/signup.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    }
+small {
+    color: black !important;
+    background-color: skyblue;
+}
+
+.set-width {
+    width: 25% !important;
+}
+
+@media screen and (max-width: 800px) {
+        .set-width {
+            width: 100% !important;
+        }
+
+    }

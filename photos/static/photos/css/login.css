@@ -1,0 +1,22 @@
+body {
+    background-image: url(/static/photos/background-images/login.jpg);
+    background-repeat: no-repeat;
+    background-size: cover !important;
+    height: 100% !important;
+    }
+
+input {
+    width: 20% !important;
+    margin-left:  40% !important;
+}
+
+.container{
+  height: 100% !important;
+}
+
+@media only screen and (max-width: 1000px) {
+    input {
+        width: 100% !important;
+        margin-left:  0% !important;
+    }
+}

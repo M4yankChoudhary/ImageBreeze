@@ -1,0 +1,36 @@
+{% extends "photos/base.html" %}
+
+{% load static %}
+
+{% block css %}
+<link href="{% static 'photos/css/login.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+<div class="container text-center">
+<h1><i class="fa fa-picture-o" aria-hidden="true"></i>Image-Breeze<i class="fas fa-wind"></i></h1>
+
+<h1>Login</h1>
+{% if message %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+{% endif %}
+<form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="username-input">Email address</label>
+      <input name="username" type="text" class="form-control" id="username-input" placeholder="Enter Username">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+  <hr style="background-color: red;">
+  <a href="{% url 'registration' %}" class="btn btn-primary">Signup</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'photos/base.html' %}
+
+{% block title %} Image Breeze: Welcome {% endblock %}
+
+{% load static %}
+
+{% block css %}
+<link href='https://fonts.googleapis.com/css?family=Alegreya SC' rel='stylesheet'>
+<link href="{% static 'photos/css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+<div class="slideshow-container">
+
+    {% for image in slideshow %}
+    <div class="mySlides">
+        <a href="{% url 'post' image.id %}"><img class="slideshow-image" src="{{image.img.url}}" style="width:100%; max-height: 700px;"></a>
+      <div class="text">{{image.title}}</div>
+    </div>
+    {% endfor %}
+    
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    
+    </div>
+    <br>
+    
+    <div style="text-align:center">
+      <span class="dot" onclick="currentSlide(1)"></span> 
+      <span class="dot" onclick="currentSlide(2)"></span> 
+      <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+    
+    <script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+    
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}    
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";  
+      }
+      for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";  
+      dots[slideIndex-1].className += " active";
+    }
+    </script>
+
+
+<div class="container my-4">
+    <!--Grid row-->
+    <div class="row text-center">
+        {% for post in posts %}
+      <!--Grid column-->
+      <div class="col-lg-4 col-md-12 mb-3">
+        <a href="{% url 'post' post.id %}"><img class="image" src="{{post.img.url}}" style="max-width: 400px; max-height: 400px;"></a>
+        <p><span class="title"> {{post.title}}</span> <br> {{post.category}} <br> Likes: {{post.likes}} <br> Creator: <a href="{% url 'user' post.creator %}" style="background-color: red; color: black;">{{post.creator}} </p>
+      </div>
+      <!--Grid column-->
+  {% endfor %}
+</div>
+</div>
+{% endblock %}

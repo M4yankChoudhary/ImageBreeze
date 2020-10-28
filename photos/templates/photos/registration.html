@@ -1,0 +1,56 @@
+{% extends "photos/base.html" %}
+
+{% load static %}
+
+{% block css %}
+<link href="{% static 'photos/css/registration.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+{% if not request.user.is_authenticated %}
+
+<div class="set-width container text-center">
+{% if message %}
+<div class="alert alert-danger" role="alert">
+{{ message }}
+</div>
+{% endif %}
+<h1><i class="fa fa-picture-o" aria-hidden="true"></i>Image-Breeze<i class="fas fa-wind"></i></h1>
+<h1> Sign up </h1>
+<form  action="{% url 'registration' %}" autocomplete="off" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="exampleInputFirstName1">First Name</label>
+        <input type="text" name="first" class="form-control" placeholder="First Name">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputLastName1">Last Name</label>
+        <input name="last" type="text" class="form-control" placeholder="Last Name">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputUsername">Username</label>
+        <input name="username" type="text" class="form-control" placeholder="Username">
+      </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <small class="form-text">Password must be at least 8 characters in length</small>
+      <small class="form-text">Make sure your password has a number in it.</small>
+      <small class="form-text">Make sure your password has a capital letter in it.</small>
+      
+    </div>
+    <button type="submit" class="btn btn-primary">Sign up</button>
+  </form>
+<br>
+  <a href="{% url 'index' %}" style="background-color: rgb(245, 241, 1);"> Already have an account? </a>
+{% endif %}
+{% endblock %}
+
+
+
+

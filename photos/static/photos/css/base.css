@@ -1,0 +1,66 @@
+body {
+    background-color: midnightblue !important;
+    color: white !important;
+  }
+  nav {
+
+    font-family: Arbutus;
+
+  }
+  .nav-link:hover {
+    background-color: red;
+    color: white;
+  }
+  .profile:hover {
+    background-color: skyblue;
+  }
+  .main-body {
+      padding: 16px;
+  }
+  .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: black;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+  }
+  .sidebar a{
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      color:white;
+      display: block;
+      transition: 0.3s;
+  }
+
+  .sidebar .closebtn {
+      position: absolute;
+      top: 0;
+      right:25px;
+      font-size: 35px;
+      margin-left: 50px;
+  }
+  .openbtn {
+      cursor: pointer;
+      background-color:transparent;
+      color: grey;
+      border: none;
+  }
+  .openbtn:hover {
+      background-color: rgba(209, 209, 209, 0.705);
+  }
+  .logout:hover {
+    background-color: red;
+  }
+  #main {
+      transition: margin-left .5s;
+  }
+
+  @media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+  }

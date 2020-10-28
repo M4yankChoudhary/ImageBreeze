@@ -1,0 +1,32 @@
+{% extends 'photos/base.html' %}
+
+{% block title %} Add a post {% endblock %}
+
+{% load static %}
+
+{% block css %}
+<link href="{% static 'photos/css/add_post.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="container text-center">
+<form action="{% url 'add_post' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="exampleFormControlFile1">Upload</label>
+        <input name="img" type="file" class="form-control-file" id="exampleFormControlFile1">
+    </div>
+    <div class="form-group">
+        <input name="title" type="text" placeholder="Title">
+    </div>
+    <div class="form-group">
+        <select name="category" class="category custom-select mr-sm-2">
+            {% for category in categories %}
+                <option value="{{category.id}}">{{category.category_name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Submit">
+</form>
+</div>
+{% endblock %}

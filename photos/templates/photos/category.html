@@ -1,0 +1,27 @@
+{% extends 'photos/base.html' %}
+
+{% block title %} {% endblock %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'photos/css/category.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="container my-4">
+    <div class="row text-center">
+        {% for post in category %}
+      <div class="col-lg-4 col-md-12 mb-4">
+        <a href="{% url 'post' post.id %}"><img class="image" src="{{post.img.url}}" style="max-width: 400px; max-height: 400px;"></a>
+        <p><span class="title"> {{post.title}}</span> <br> {{post.category}} <br> Likes: {{post.likes}} <br> Creator: {{post.creator}} </p>
+      </div>
+      {% empty %}
+    <div class="jumbotron" style="background-color: black;">
+    <h1>Be the first to upload images in this category</h1><br>
+    <a class="nav-link" href="{% url 'add_post' %}"><h2>Upload</h2></a>
+    </div>
+  {% endfor %}
+</div>
+</div>
+{% endblock %}
