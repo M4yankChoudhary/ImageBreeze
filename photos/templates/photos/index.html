@@ -69,7 +69,7 @@
       <!--Grid column-->
       <div class="col-lg-4 col-md-12 mb-3">
         <a href="{% url 'post' post.id %}"><img class="image" src="{{post.img.url}}" style="max-width: 400px; max-height: 400px;"></a>
-        <p><span class="title"> {{post.title}}</span> <br> {{post.category}} <br> Likes: {{post.likes}} <br> Creator: <a href="{% url 'user' post.creator %}" style="background-color: red; color: black;">{{post.creator}} </p>
+        <p><span class="title"> {{post.title}}</span> <br> {{post.category}} <br> Likes: {{post.likes}} <br> Creator: <a href="{{post.creator}}" style="background-color: red; color: black;"> {{post.creator}}</a> </p>
       </div>
       <!--Grid column-->
   {% endfor %}
