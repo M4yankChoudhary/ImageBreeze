@@ -91,38 +91,38 @@ def add_Post(request):
             "posts": Post.objects.all(),
         }
 
-        return render(request, 'photos/getitongithub.html', context)
+        return render(request, 'photos/add_post.html', context)
 
     else:
-        #title = request.POST['title']
-        #if not title:
-            #return render(request, "photos/error.html", {"message": "Title required"})
-        #date = strftime(" %a, %d %b %Y", localtime())
-        #time = strftime(" %I:%M %p", localtime())
-        #image = request.FILES['img']
-        #if not image:
-            #return render(request, "photos/error.html", {"message": "Select an image you want to upload"})
-        #category_id = request.POST['category']
-        #category = Category.objects.get(pk=category_id)
+        title = request.POST['title']
+        if not title:
+            return render(request, "photos/error.html", {"message": "Title required"})
+        date = strftime(" %a, %d %b %Y", localtime())
+        time = strftime(" %I:%M %p", localtime())
+        image = request.FILES['img']
+        if not image:
+            return render(request, "photos/error.html", {"message": "Select an image you want to upload"})
+        category_id = request.POST['category']
+        category = Category.objects.get(pk=category_id)
 
-        #post = Post(title=title, img=image, category=category, date=date, time=time, creator=request.user.username)
-        #post.save()
+        post = Post(title=title, img=image, category=category, date=date, time=time, creator=request.user.username)
+        post.save()
         return HttpResponseRedirect(reverse('index'))
 
 def deletePost(request, post_id):
     ''' Delete Post '''
 
-    #if not request.user.is_authenticated:
-        #return render(request, "photos/login.html", {"message" : "You Must Login First."})
-    #try:
-        #post = Post.objects.get(pk=post_id)
-        #if post.creator == request.user.username:
-            #Post.objects.filter(pk=post_id).delete()
-            #UserLikedPost.objects.filter(posts_id=post_id).delete()
-    #except Post.DoesNotExist:
-        #raise Http404("Not Found")
-    #except UserLikedPost.DoesNotExist:
-        #raise Http404("Not Found")
+    if not request.user.is_authenticated:
+        return render(request, "photos/login.html", {"message" : "You Must Login First."})
+    try:
+        post = Post.objects.get(pk=post_id)
+        if post.creator == request.user.username:
+            Post.objects.filter(pk=post_id).delete()
+            UserLikedPost.objects.filter(posts_id=post_id).delete()
+    except Post.DoesNotExist:
+        raise Http404("Not Found")
+    except UserLikedPost.DoesNotExist:
+        raise Http404("Not Found")
     return HttpResponseRedirect(reverse('index'))
 
 def like_It(request, post_id):
